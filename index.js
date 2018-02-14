@@ -52,6 +52,10 @@ class SockJsConnection extends Connection {
     this.finished = true
     this.connection.close()
   }
+  
+  closeConnection() {
+    this.connection.close()
+  }
 
 }
 
