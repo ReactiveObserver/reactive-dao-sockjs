@@ -8,7 +8,7 @@
     "url": "https://github.com/reactiveobserver/reactive-dao-sockjs/issues"
   },
   "dependencies": {
-    "sockjs-client": "*"
+    "sockjs-client": "https://github.com/sockjs/sockjs-client.git"
   },
   "description": "universal reactive data access object",
   "devDependencies": {
