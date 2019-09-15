@@ -25,20 +25,16 @@ class SockJsConnection extends Connection {
       connection.onopen = ef
       this.handleDisconnect()
     }).bind(this)
-    this.connection.onmessage = (function (e) {
-      console.info("INCOMING MESSAGE", e.data)
+    this.connection.onmessage = (e) => {
+      if(this.settings.logMessages) console.info("[reactive-dao-sockjs]", "INCOMING MESSAGE", e.data)
       var message = JSON.parse(e.data)
       this.handleMessage(message)
-    }).bind(this)
-    /*this.connection.onheartbeat = (function(){
-     console.log('BULLET PING!')
-     this.send({type:"ping"})
-     }).bind(this)*/
+    }
   }
 
   send(message) {
     var data = JSON.stringify(message)
-    console.info("OUTGOING MESSAGE", data)
+    if(this.settings.logMessages) console.info("[reactive-dao-sockjs]", "OUTGOING MESSAGE", data)
     this.connection.send(data)
   }
 
