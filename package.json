@@ -8,7 +8,10 @@
     "url": "https://github.com/reactiveobserver/reactive-dao-sockjs/issues"
   },
   "dependencies": {
-    "sockjs-client": "https://github.com/sockjs/sockjs-client.git"
+    "debug": "^4.1.1",
+    "reactive-dao": "https://github.com/ReactiveObserver/reactive-dao.git",
+    "sockjs-client": "https://github.com/sockjs/sockjs-client.git",
+    "supports-color": "^7.1.0"
   },
   "description": "universal reactive data access object",
   "devDependencies": {
@@ -22,7 +25,6 @@
   "homepage": "",
   "license": "MIT",
   "main": "index.js",
-  "browser": "browser.js",
   "maintainers": [
     {
       "email": "michal@emikse.com",

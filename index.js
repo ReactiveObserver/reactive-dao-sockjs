@@ -1,6 +1,7 @@
-var SockJS = require("sockjs-client")
-var rd = require("reactive-dao")
-var Connection = rd.ReactiveConnection
+const SockJS = require("sockjs-client")
+const rd = require("reactive-dao")
+const Connection = rd.ReactiveConnection
+const debug = require('debug')('reactive-dao:sockjs')
 
 class SockJsConnection extends Connection {
   constructor(sessionId, url, settings) {
@@ -11,13 +12,13 @@ class SockJsConnection extends Connection {
 
   initialize() {
     this.connection = new SockJS(this.url)
-    var connection = this.connection
+    const connection = this.connection
     connection.onopen = (function () {
       if (connection.readyState === SockJS.CONNECTING) return setTimeout(connection.onopen, 230)
       this.handleConnect()
     }).bind(this)
     connection.onclose = (function () {
-      var ef = function () {
+      const ef = function () {
       }
       connection.onclose = ef
       connection.onmessage = ef
@@ -26,8 +27,8 @@ class SockJsConnection extends Connection {
       this.handleDisconnect()
     }).bind(this)
     this.connection.onmessage = (function (e) {
-      console.info("INCOMING MESSAGE", e.data)
-      var message = JSON.parse(e.data)
+      debug("MSG IN:", e.data)
+      const message = JSON.parse(e.data)
       this.handleMessage(message)
     }).bind(this)
     /*this.connection.onheartbeat = (function(){
@@ -37,8 +38,8 @@ class SockJsConnection extends Connection {
   }
 
   send(message) {
-    var data = JSON.stringify(message)
-    console.info("OUTGOING MESSAGE", data)
+    const data = JSON.stringify(message)
+    debug("MSG OUT:", data)
     this.connection.send(data)
   }
 
